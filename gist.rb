@@ -25,7 +25,7 @@ module Gist
   @@gist_url = 'http://gist.github.com/%s.txt'
 
   def read(gist_id)
-    return help if gist_id == '-h' || gist_id.nil? || gist_id[/help/]
+    return help if gist_id.nil? || gist_id[/^\-h|help$/]
     return open(@@gist_url % gist_id).read unless gist_id.to_i.zero?
     return open(gist_id + '.txt').read if gist_id[/https?:\/\/gist.github.com\/\d+$/]
   end
