@@ -26,7 +26,8 @@ module Gist
 
   def read(gist_id)
     return help if gist_id == '-h' || gist_id.nil? || gist_id[/help/]
-    open(@@gist_url % gist_id).read
+    return open(@@gist_url % gist_id).read unless gist_id.to_i.zero?
+    return open(gist_id + '.txt').read if gist_id[/https?:\/\/gist.github.com\/\d+$/]
   end
 
   def write(content, private_gist)
